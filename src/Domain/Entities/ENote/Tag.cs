@@ -8,6 +8,6 @@ public class Tag : IEntity<int>
 
     public required string TagName { get; set; }
 
-    public ICollection<WordTag>? WordTags { get; set; }
+    public ICollection<Word>? Words { get; set; }
 
 }

@@ -6,11 +6,27 @@ internal class WordConfiguration : IEntityTypeConfiguration<Word>
 {
     public void Configure(EntityTypeBuilder<Word> builder)
     {
-        builder.HasKey(w => w.WordId);
-        builder.Property(w => w.WordText).IsRequired();
-        builder.Property(w => w.Meaning).IsRequired();
-        builder.Property(w => w.PartOfSpeech).IsRequired();
-        builder.Property(w => w.Pronunciation).IsRequired();
+        builder.HasKey(w => w.Id);
+
+        builder.Property(w => w.WordText)
+            .HasMaxLength(50)
+            .IsRequired();
+
+        builder.Property(w => w.EMeaning)
+            .HasColumnType("varchar(500)")
+            .IsRequired();
+
+        builder.Property(w => w.VMeaning)
+            .HasColumnType("nvarchar(500)")
+            .IsRequired();
+
+        builder.Property(w => w.PartOfSpeech)
+            .HasColumnType("varchar(10)")
+            .IsRequired();
+
+        builder.Property(w => w.Pronunciation)
+            .HasColumnType("varchar(30)")
+            .IsRequired();
 
         builder.HasMany(w => w.ExampleSentences)
             .WithOne(es => es.Word)
